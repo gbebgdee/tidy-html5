@@ -30,7 +30,7 @@ jobs:
   build_and_test:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         include:
 
@@ -49,7 +49,7 @@ jobs:
            vers_command: "./tidy.exe --version"
            test_command: "ruby test.rb test"
            
-         - os: windows-2016
+         - os: windows-2021
            flags: "-G 'MinGW Makefiles'"
            vers_command: "./tidy --version"
            test_command: "ruby test.rb test"
@@ -61,7 +61,7 @@ jobs:
     # We'll use the windows-2016 instance to perform a MinGW build.
     # Of course, we only want to install if this is the correct target.
     - name: Install MinGW-w64
-      if: ${{matrix.os == 'windows-2016'}}
+      if: ${{matrix.os == 'windows-2021'}}
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
